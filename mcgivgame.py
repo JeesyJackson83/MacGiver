@@ -1,9 +1,9 @@
 """
-Jeu Donkey Kong Labyrinthe
-Jeu dans lequel on doit déplacer DK jusqu'aux bananes à travers un labyrinthe.
+MacGyver Game by JJ
+find the exit but catch the items for it before
 
-Script Python
-Fichiers : tp_dk_pygame.py, classes.py, constantes.py, n1, n2 + images
+Python Script
+Files : mcgivgame.py, class.py, constant.py, level.txt + pictures
 """
 import pygame
 from pygame.locals import *

@@ -6,7 +6,7 @@ sprite_width = 30
 cote_fenetre = sprite_length * sprite_width
 
 #Window custom
-window_title = "DK Labyrinthe by JJ"
+window_title = "McGyver by JJ"
 image_icone = "images/dk_droite.png"
 
 #In game Pictures link
