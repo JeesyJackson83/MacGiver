@@ -1,15 +1,15 @@
-"""Constantes du jeu de Labyrinthe Donkey Kong"""
+"""Constant files for MacGyver Game"""
 
-#parametre de la fenetre
-nombre_sprite_cote = 15
-taille_sprite = 30
-cote_fenetre = nombre_sprite_cote * taille_sprite
+#window setup
+sprite_length = 15
+sprite_width = 30
+cote_fenetre = sprite_length * sprite_width
 
-#personnalisation de la fenetre
-titre_fenetre = "DK Labyrinthe by JJ"
+#Window custom
+window_title = "DK Labyrinthe by JJ"
 image_icone = "images/dk_droite.png"
 
-#listes des images en jeu
+#In game Pictures link
 image_accueil = "images/accueil.png"
 image_fond = "images/fond.jpg"
 image_mur = "images/mur.png"
