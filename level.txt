@@ -1,4 +1,4 @@
-d00000000000000\n
+000000000000000\n
 0mm0mm0mm0mm0mm\n
 000mmm0mm0mm0mm\n
 0mmmmm0mmmmm0mm\n

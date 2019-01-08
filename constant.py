@@ -7,11 +7,11 @@ cote_fenetre = sprite_length * sprite_width
 
 #Window custom
 window_title = "McGyver by JJ"
-image_icone = "images/dk_droite.png"
+image_icone = "images/MacGyver.png"
 
 #In game Pictures link
-image_accueil = "images/accueil.png"
-image_fond = "images/fond.jpg"
-image_mur = "images/mur.png"
-image_depart = "images/depart.png"
-image_arrivee = "images/arrivee.png"
+#image_accueil = "images/accueil.png"
+start = "images/start.png"
+background_p = "images/background.jpg"
+wall = "images/mur.png"
+image_arrivee = "images/Gardien.png"
