@@ -2,6 +2,7 @@
 
 import pygame
 from pygame.locals import *
+import random
 from constant import *
 
 class Level:
@@ -28,15 +29,18 @@ class Level:
             #on save cette structure
             self.structure = level_structure
 
+
     def showme(self, window):
         """Méthode permettant d'afficher le niveau en fonction
-        de la liste de structure renvoyée par generer()"""
+        de la liste de structure renvoyée par level_file()"""
         #chargement des images (seule celle d'arrivée contient de la transparence)
         mur = pygame.image.load(wall).convert()
         arrivee = pygame.image.load(image_arrivee).convert_alpha()
 
+
         #On parcourt la liste du niveau
         num_line = 0
+        # path_list = []
         for line in self.structure:
             #on parcourt les listes de lignes
             num_case = 0
@@ -52,8 +56,42 @@ class Level:
             num_line += 1
 
 
+
+class RandomObjects:
+    """The class for the items."""
+
+    def __init__(self, img_items, level):
+        """Init items."""
+        self.case_y = 0
+        self.case_x = 0
+        self.x = 0
+        self.y = 0
+        self.level = level
+        self.check = True
+        self.img_items = pygame.image.load(img_items).convert_alpha()
+        self.structure = level.structure
+
+    def showme_item(self, window):
+        """Display items in random sprites"""
+        while self.check:
+            self.case_x = random.randint(0, sprite_length - 1)
+            # We randomize the case_x position
+            self.case_y = random.randint(0, sprite_length - 1)
+            # same for case_y position
+            if self.structure[self.case_y][self.case_x] == '0':
+                # if the randomized position is located on a free space
+                self.y = self.case_y * sprite_width
+                # We define/accept the position for the object
+                self.x = self.case_x * sprite_width
+                self.check = False
+                # Once we have defined a items position, we kill the loop
+
+
+
+
+
 class Character:
-    """This Class is for character initialization"""
+    """This Class is for character initialization and movement"""
     def __init__(self, picgyv, level):
         #sprite du Perso
         self.picgyv = pygame.image.load(picgyv).convert_alpha()

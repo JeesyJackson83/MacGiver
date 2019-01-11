@@ -1,4 +1,4 @@
-000000000000000\n
+d00000000000000\n
 0mm0mm0mm0mm0mm\n
 000mmm0mm0mm0mm\n
 0mmmmm0mmmmm0mm\n
@@ -10,6 +10,6 @@ m00000m0mmm0mmm\n
 mm0mmmm0m00000m\n
 mm0mmmm0mmm0mmm\n
 mm0m0000mm00mmm\n
-m00m0mmm00mmmmm\n
-mmmm000mmm00000\n
+m00m0mmmmmmmmmm\n
+mm0m000mmm00000\n
 mm0m0m00000mmma\n

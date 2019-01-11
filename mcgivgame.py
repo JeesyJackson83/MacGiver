@@ -7,6 +7,7 @@ Files : mcgivgame.py, class.py, constant.py, level.txt + pictures
 """
 import pygame
 from pygame.locals import *
+import random
 
 from class_gyv import *
 from constant import *
@@ -74,7 +75,16 @@ while continuer:
 
         #creation de MacG
         mcgyv = Character("images/MacGyver.png", level)
+        needle = RandomObjects(needle_p, level)
+        needle.showme_item(window)
+        tube = RandomObjects(tube_p, level)
+        tube.showme_item(window)
+        ether = RandomObjects(ether_p, level)
+        ether.showme_item(window)
 
+        needle_on = True
+        tube_on = True
+        ether_on = True
     #Boucle du jeu
     while continuer_jeu:
 
@@ -108,8 +118,40 @@ while continuer:
         window.blit(background, (0,0))
         level.showme(window)
         window.blit(mcgyv.direction, (mcgyv.x, mcgyv.y)) #dk.direction = l'image dan la bonne direction
+        # pygame.display.flip()
+
+        if needle_on:
+            window.blit(needle.img_items, (needle.x, needle.y))
+            if (mcgyv.x, mcgyv.y) == (needle.x, needle.y):
+                needle_on = False
+                window.blit(needle.img_items, (10,0))
+                print("you picked Needle !")
+
+
+        if tube_on:
+            window.blit(tube.img_items, (tube.x, tube.y))
+            if (mcgyv.x, mcgyv.y) == (tube.x, tube.y):
+                tube_on = False
+                window.blit(tube.img_items, (10, 0))
+                print("you picked Tube !")
+
+        if ether_on:
+            window.blit(ether.img_items, (ether.x, ether.y))
+            if (mcgyv.x, mcgyv.y) == (ether.x, ether.y):
+                ether_on = False
+                window.blit(ether.img_items, (10, 0))
+                print("you picked Ether !")
+
+
         pygame.display.flip()
 
+
         #victoire -> retour a l'accueil
-        if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a':
+        if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a' and needle_on == False \
+        and tube_on == False and ether_on == False:
+            print("Vous avez GG")
             continuer_jeu = 0
+        elif level.structure[mcgyv.case_y][mcgyv.case_x] == 'a':
+            print("Perdu, il vous manque au moins un objet !")
+            continuer_jeu = 0
+
