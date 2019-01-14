@@ -1,4 +1,4 @@
-"""Classes du jeu de Labyrinthe Donkey Kong"""
+"""Class for MacGyver escape game by JJ"""
 
 import pygame
 from pygame.locals import *
@@ -15,37 +15,35 @@ class Level:
         """method for use an external file to create level, line by line"""
         with open(self.file, "r") as file:
             level_structure = []
-            #On parcourt les lignes du ficher
+            #We look line in the file
             for line in file:
                 level_line = []
-                #on parcourr les sprites (lettres) contenus dans le fichier
+                #we look sprite (letters) in each line
                 for sprite in line:
-                    #on ignore les "\n" de fin de ligne
+                    #ignore '\n' in fila
                     if sprite != '\n':
-                        #on ajoute le sprite a la liste de la ligne
+                        #add sprite to list line
                         level_line.append(sprite)
-                #on ajoute la ligne a la liste du niveau
+                #add line in level structure
                 level_structure.append(level_line)
-            #on save cette structure
+            #save structure created
             self.structure = level_structure
 
 
     def showme(self, window):
-        """Méthode permettant d'afficher le niveau en fonction
-        de la liste de structure renvoyée par level_file()"""
-        #chargement des images (seule celle d'arrivée contient de la transparence)
+        """Method for show level with created file -> level_file()"""
+        #load picture
         mur = pygame.image.load(wall).convert()
-        arrivee = pygame.image.load(image_arrivee).convert_alpha()
+        arrivee = pygame.image.load(image_arrivee).convert()
 
 
-        #On parcourt la liste du niveau
+        #Check level structure
         num_line = 0
-        # path_list = []
         for line in self.structure:
-            #on parcourt les listes de lignes
+            #check line in structure
             num_case = 0
             for sprite in line:
-                #on calcule la position réelle en pixels
+                #transform position in real pixels position
                 x = num_case * sprite_width
                 y = num_line * sprite_width
                 if sprite == 'm':   #m = mur
@@ -93,34 +91,34 @@ class RandomObjects:
 class Character:
     """This Class is for character initialization and movement"""
     def __init__(self, picgyv, level):
-        #sprite du Perso
+        #Character Sprite
         self.picgyv = pygame.image.load(picgyv).convert_alpha()
-        #position du perso en cases et pixels
+        #Character case and pixel positions
         self.case_x = 0
         self.case_y = 0
         self.x = 0
         self.y = 0
-        #direction par défaut
+        #default direction for a future use case
         self.direction = self.picgyv
-        #niveau dans lequel le perso se trouve
+        #level where Charact interact
         self.level = level
 
     def deplacer(self, direction):
-        """Méthode permettant de deplacer le perso"""
+        """Method for Character movement"""
 
-        #deplacement vers la droite
+        #move right
         if direction == 'right':
-            #pour ne pas depasser l'ecran
+            #we don't want to be off screen
             if self.case_x < (sprite_length - 1):
-                #on verifie que la case de destination n'est pas un mur
+                #check for free space not wall
                 if self.level.structure[self.case_y][self.case_x+1] != 'm':
-                    #depalcement d'une case
+                    #case movement
                     self.case_x += 1
-                    #calcul de la position "reelle" en pixel
+                    #translation case to pixel movement
                     self.x = self.case_x * sprite_width
 
 
-        #depalcement vers la gauche
+        #move left
         if direction == 'left':
             if self.case_x > 0:
                 if self.level.structure[self.case_y][self.case_x-1] != 'm':
@@ -128,7 +126,7 @@ class Character:
                     self.x = self.case_x * sprite_width
 
 
-        #depalcement vers le haut
+        #move up
         if direction == 'up':
             if self.case_y > 0:
                 if self.level.structure[self.case_y-1][self.case_x] != 'm':
@@ -136,7 +134,7 @@ class Character:
                     self.y = self.case_y * sprite_width
 
 
-        #depalcement vers la bas
+        #move down
         if direction == 'down':
             if self.case_y < (sprite_length - 1):
                 if self.level.structure[self.case_y+1][self.case_x] != 'm':

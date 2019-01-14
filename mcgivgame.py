@@ -1,3 +1,6 @@
+#! /usr/bin/env python3
+# coding: utf-8
+
 """
 MacGyver Game by JJ
 find the exit but catch the items for it before
@@ -14,17 +17,17 @@ from constant import *
 
 pygame.init()
 
-#Ouverture de la fenêtre Pygame (carré : largeur = hauteur)
+#Open Pygame window (width = height)
 window = pygame.display.set_mode((cote_fenetre, cote_fenetre))
-#Icone
+#Icon
 icone = pygame.image.load(image_icone)
 pygame.display.set_icon(icone)
-#Titre
+#Title
 pygame.display.set_caption(window_title)
 
-#boucle principale
-continuer = 1
-while continuer:
+#Main Loop
+continue_main = 1
+while continue_main:
     #chargement et affichage de l'écran d'accueil
     accueil = pygame.image.load(start).convert()
     window.blit(accueil, (0,0))
@@ -33,47 +36,46 @@ while continuer:
     pygame.display.flip()
 
     #remise des variables a 1 à chaque tour de boucle
-    continuer_jeu = 1
-    continuer_accueil = 1
+    continue_game = 1
+    continue_start = 1
 
     #boucle d'accueil
-    while continuer_accueil:
+    while continue_start:
 
-        # Limitation de vitesse de la boucle
-        # 30 frames par secondes suffisent
+        # 30 frames per seconds
         pygame.time.Clock().tick(30)
 
         for event in pygame.event.get():
 
-            #si l'utilisateur quitte, on met les variables
-            #de boucle a 0 pour n'en parcourir aucune et fermer
+            # if user want to quit
+            #All loop don't be launch
             if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
-                continuer_accueil = 0
-                continuer_jeu = 0
-                continuer = 0
-                #variable de choix de niveau
+                continue_start = 0
+                continue_game = 0
+                continue_main = 0
+                #variable for level choice
                 begin = 0
 
             elif event.type == KEYDOWN:
-                #lancement du niveau 1
+                #start level
                 if event.key == K_F1:
-                    continuer_accueil = 0 #on quitte l'accueil
-                    begin = 'level.txt' #On défini le niveau a charger
+                    continue_start = 0
+                    begin = 'level.txt'
 
 
 
-    #verif que le joueur a bie nfait un choix de niveau
-    #pour ne pas charger s'il quitte
+    #check if user has made a choice
+    #if not we don't load the map
     if begin != 0:
-        #chargement du fond
+        #load background
         background = pygame.image.load(background_p).convert()
 
-        #génrération d'un niveau à partir d'un fichier
+        #level creation with level file
         level = Level(begin)
         level.level_file()
         level.showme(window)
 
-        #creation de MacG
+        #Character and objects variables
         mcgyv = Character("images/MacGyver.png", level)
         needle = RandomObjects(needle_p, level)
         needle.showme_item(window)
@@ -82,29 +84,30 @@ while continuer:
         ether = RandomObjects(ether_p, level)
         ether.showme_item(window)
 
+        #boolean for objects
         needle_on = True
         tube_on = True
         ether_on = True
-    #Boucle du jeu
-    while continuer_jeu:
 
-        #limitation vitesse boucle
+    #Game Loop
+    while continue_game:
+
+        # 30 frames per seconds
         pygame.time.Clock().tick(30)
 
         for event in pygame.event.get():
 
-            # Si l'utilisateur quitte, on met la variable qui continue le jeu
-            # ET la variable générale à 0 pour fermer la fenêtre
+            # if Quit close the program
             if event.type == QUIT:
-                continuer_jeu = 0
-                continuer = 0
+                continue_game = 0
+                continue_main = 0
 
             elif event.type == KEYDOWN:
-                #si ECHAP ici on revient quu'au menu
+                #if Echap return to lobby
                 if event.key == K_ESCAPE:
-                    continuer_jeu = 0
+                    continue_game = 0
 
-                #touche de déplacement de DK
+                #MacGyver move key
                 elif event.key == K_RIGHT:
                     mcgyv.deplacer('right')
                 elif event.key == K_LEFT:
@@ -114,12 +117,12 @@ while continuer:
                 elif event.key == K_DOWN:
                     mcgyv.deplacer('down')
 
-        #affichages aux nouvelles positions
+        #refresh position
         window.blit(background, (0,0))
         level.showme(window)
-        window.blit(mcgyv.direction, (mcgyv.x, mcgyv.y)) #dk.direction = l'image dan la bonne direction
-        # pygame.display.flip()
+        window.blit(mcgyv.direction, (mcgyv.x, mcgyv.y))
 
+        #boolean for interaction between Character and objects
         if needle_on:
             window.blit(needle.img_items, (needle.x, needle.y))
             if (mcgyv.x, mcgyv.y) == (needle.x, needle.y):
@@ -127,7 +130,7 @@ while continuer:
                 window.blit(needle.img_items, (10,0))
                 print("you picked Needle !")
 
-
+        # boolean for interaction between Character and objects
         if tube_on:
             window.blit(tube.img_items, (tube.x, tube.y))
             if (mcgyv.x, mcgyv.y) == (tube.x, tube.y):
@@ -135,6 +138,7 @@ while continuer:
                 window.blit(tube.img_items, (10, 0))
                 print("you picked Tube !")
 
+        # boolean for interaction between Character and objects
         if ether_on:
             window.blit(ether.img_items, (ether.x, ether.y))
             if (mcgyv.x, mcgyv.y) == (ether.x, ether.y):
@@ -146,12 +150,12 @@ while continuer:
         pygame.display.flip()
 
 
-        #victoire -> retour a l'accueil
+        #Win condition, back to lobby
         if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a' and needle_on == False \
         and tube_on == False and ether_on == False:
             print("Vous avez GG")
-            continuer_jeu = 0
+            continue_game = 0
         elif level.structure[mcgyv.case_y][mcgyv.case_x] == 'a':
             print("Perdu, il vous manque au moins un objet !")
-            continuer_jeu = 0
+            continue_game = 0
 
