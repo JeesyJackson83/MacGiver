@@ -127,7 +127,6 @@ while continue_main:
             window.blit(needle.img_items, (needle.x, needle.y))
             if (mcgyv.x, mcgyv.y) == (needle.x, needle.y):
                 needle_on = False
-                window.blit(needle.img_items, (10,0))
                 print("you picked Needle !")
 
         # boolean for interaction between Character and objects
@@ -135,7 +134,6 @@ while continue_main:
             window.blit(tube.img_items, (tube.x, tube.y))
             if (mcgyv.x, mcgyv.y) == (tube.x, tube.y):
                 tube_on = False
-                window.blit(tube.img_items, (10, 0))
                 print("you picked Tube !")
 
         # boolean for interaction between Character and objects
@@ -143,19 +141,21 @@ while continue_main:
             window.blit(ether.img_items, (ether.x, ether.y))
             if (mcgyv.x, mcgyv.y) == (ether.x, ether.y):
                 ether_on = False
-                window.blit(ether.img_items, (10, 0))
                 print("you picked Ether !")
-
 
         pygame.display.flip()
 
+        incomplete_stuff = True
+        if needle_on == False and tube_on == False and ether_on == False:
+            incomplete_stuff = False
+            print("You have all the stuff for take ground the gardian")
+
 
         #Win condition, back to lobby
-        if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a' and needle_on == False \
-        and tube_on == False and ether_on == False:
-            print("Vous avez GG")
+        if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a' and incomplete_stuff == False:
+            print("Well done bro'")
             continue_game = 0
         elif level.structure[mcgyv.case_y][mcgyv.case_x] == 'a':
-            print("Perdu, il vous manque au moins un objet !")
+            print("Oops, try again !")
             continue_game = 0
 
