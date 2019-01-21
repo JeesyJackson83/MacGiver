@@ -66,7 +66,7 @@ class RandomObjects:
         self.y = 0
         self.level = level
         self.check = True
-        self.img_items = pygame.image.load(img_items).convert_alpha()
+        self.img_items = pygame.image.load(img_items).convert()
         self.structure = level.structure
 
     def showme_item(self, window):
