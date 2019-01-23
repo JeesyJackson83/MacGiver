@@ -45,14 +45,13 @@ class Level:
             for sprite in line:
                 #transform position in real pixels position
                 x = num_case * sprite_width
-                y = num_line * sprite_width
+                y = num_line * sprite_width + banner
                 if sprite == 'm':   #m = mur
                     window.blit(mur, (x,y))
                 elif sprite == 'a': #a = arrivee
                     window.blit(arrivee, (x,y))
                 num_case += 1
             num_line += 1
-
 
 
 class RandomObjects:
@@ -63,7 +62,7 @@ class RandomObjects:
         self.case_y = 0
         self.case_x = 0
         self.x = 0
-        self.y = 0
+        self.y = 30
         self.level = level
         self.check = True
         self.img_items = pygame.image.load(img_items).convert()
@@ -78,14 +77,11 @@ class RandomObjects:
             # same for case_y position
             if self.structure[self.case_y][self.case_x] == '0':
                 # if the randomized position is located on a free space
-                self.y = self.case_y * sprite_width
+                self.y = self.case_y * sprite_width + banner
                 # We define/accept the position for the object
                 self.x = self.case_x * sprite_width
                 self.check = False
                 # Once we have defined a items position, we kill the loop
-
-
-
 
 
 class Character:
@@ -97,7 +93,7 @@ class Character:
         self.case_x = 0
         self.case_y = 0
         self.x = 0
-        self.y = 0
+        self.y = 30
         #default direction for a future use case
         self.direction = self.picgyv
         #level where Charact interact
@@ -131,7 +127,7 @@ class Character:
             if self.case_y > 0:
                 if self.level.structure[self.case_y-1][self.case_x] != 'm':
                     self.case_y -= 1
-                    self.y = self.case_y * sprite_width
+                    self.y = self.case_y * sprite_width + banner
 
 
         #move down
@@ -139,5 +135,4 @@ class Character:
             if self.case_y < (sprite_length - 1):
                 if self.level.structure[self.case_y+1][self.case_x] != 'm':
                     self.case_y += 1
-                    self.y = self.case_y * sprite_width
-
+                    self.y = self.case_y * sprite_width + banner
