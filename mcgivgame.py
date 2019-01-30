@@ -200,7 +200,7 @@ while continue_main:
         else:
             # Show loose message
             font_loose = pygame.font.Font(None, 30)
-            loose_game = font_loose.render("You missed something and death find you !", 1, (255, 0, 0))
+            loose_game = font_loose.render("You missed something and death found you !", 1, (255, 0, 0))
             window.blit(loose_game, (20, 200))
 
         # 30 frames per seconds
