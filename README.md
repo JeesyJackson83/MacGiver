@@ -11,12 +11,12 @@ Usage
 This program is a standalone
 
 Files
-mcgivgame.py, main script the one to run
+main.py, main script the one to run
 constant.py, place for constants 
-class_gyv.py, Maze class, player class, objects class
-images/, directory for image files
-Level.txt, files for maze
-requirement.txt, dependences for feeding pip
+classes/ directory for character.py, level_cfg.py, objects.py
+images/ directory for image files
+Level_design.txt, files for maze
+requirement.txt, dependence
 README.md, you're reading it!
 
 Features

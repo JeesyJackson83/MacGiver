@@ -1,12 +1,1 @@
-Package         Version
---------------- -------
-cycler          0.10.0 
-kiwisolver      1.0.1  
-matplotlib      3.0.2  
-numpy           1.15.4 
-pip             10.0.1 
-pygame          1.9.4  
-pyparsing       2.3.0  
-python-dateutil 2.7.5  
-setuptools      39.1.0 
-six             1.12.0 
+pygame==1.9.4

@@ -1,23 +1,28 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """Constant files for MacGyver Game"""
 
-#window setup
-sprite_length = 15
-sprite_width = 30
-banner = 30
-cote_fenetre = sprite_length * sprite_width
-cote_fenetre_h = sprite_length * sprite_width + banner
+import os
 
-#Window custom
-window_title = "McGyver by JJ"
-image_icone = "images/MacGyver.png"
+# window setup
+SPRITE_LENGTH = 15
+SPRITE_WIDTH = 30
+BANNER = 30
+COTE_FENETRE = SPRITE_LENGTH * SPRITE_WIDTH
+COTE_FENETRE_H = SPRITE_LENGTH * SPRITE_WIDTH + BANNER
 
-#In game Pictures link
-#image_accueil = "images/accueil.png"
-start = "images/start.png"
-background_p = "images/background.jpg"
-wall = "images/mur.png"
-image_arrivee = "images/Gardien.png"
-needle_p = "images/aiguille.png"
-tube_p = "images/tube_plastique.png"
-ether_p = "images/ether.png"
-syringe_p = "images/syringe.png"
+# Window custom
+WINDOW_TITLE = "McGyver by JJ"
+IMAGE_ICONE = "images/MacGyver.png"
+
+# In game Pictures link
+START = "images/start.png"
+BACKGROUND_P = "images/background.jpg"
+WALL = "images/mur.png"
+IMAGE_ARRIVEE = "images/Gardien.png"
+PICGYV_P = "images/MacGyver.png"
+NEEDLE_P = "images/aiguille.png"
+TUBE_P = "images/tube_plastique.png"
+ETHER_P = "images/ether.png"
+SYRINGE_P = "images/syringe.png"
