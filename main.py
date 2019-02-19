@@ -65,7 +65,10 @@ while continue_main:
                 # start level
                 if event.key == K_F1:
                     continue_start = 0
-                    begin = 'level_design.txt'
+                    begin = os.path.join("level_storage/level_design_01.txt")
+                # if event.key == K_F2:
+                #     continue_start = 0
+                #     begin = os.path.join("level_storage/level_design_02.txt")
 
     # check if user has made a choice
     # if not we don't load the map
