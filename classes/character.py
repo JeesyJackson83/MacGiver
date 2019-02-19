@@ -5,7 +5,7 @@
 
 import pygame
 from pygame.locals import *
-from constant import *
+import constant as cs
 
 
 class Character:
@@ -30,31 +30,31 @@ class Character:
         # move right
         if direction == 'right':
             # we don't want to be off screen
-            if self.case_x < (SPRITE_LENGTH - 1):
+            if self.case_x < (cs.SPRITE_LENGTH - 1):
                 # check for free space not wall
                 if self.level.structure[self.case_y][self.case_x + 1] != 'm':
                     # case movement
                     self.case_x += 1
                     # translation case to pixel movement
-                    self.x = self.case_x * SPRITE_WIDTH
+                    self.x = self.case_x * cs.SPRITE_WIDTH
 
         # move left
         if direction == 'left':
             if self.case_x > 0:
                 if self.level.structure[self.case_y][self.case_x - 1] != 'm':
                     self.case_x -= 1
-                    self.x = self.case_x * SPRITE_WIDTH
+                    self.x = self.case_x * cs.SPRITE_WIDTH
 
         # move up
         if direction == 'up':
             if self.case_y > 0:
                 if self.level.structure[self.case_y - 1][self.case_x] != 'm':
                     self.case_y -= 1
-                    self.y = self.case_y * SPRITE_WIDTH + BANNER
+                    self.y = self.case_y * cs.SPRITE_WIDTH + cs.BANNER
 
         # move down
         if direction == 'down':
-            if self.case_y < (SPRITE_LENGTH - 1):
+            if self.case_y < (cs.SPRITE_LENGTH - 1):
                 if self.level.structure[self.case_y + 1][self.case_x] != 'm':
                     self.case_y += 1
-                    self.y = self.case_y * SPRITE_WIDTH + BANNER
+                    self.y = self.case_y * cs.SPRITE_WIDTH + cs.BANNER

@@ -14,7 +14,7 @@ COTE_FENETRE_H = SPRITE_LENGTH * SPRITE_WIDTH + BANNER
 
 # Window custom
 WINDOW_TITLE = "McGyver by JJ"
-IMAGE_ICONE = "images/MacGyver.png"
+IMAGE_ICONE = os.path.join("images/MacGyver.png")
 
 # In game Pictures link
 START = "images/start.png"

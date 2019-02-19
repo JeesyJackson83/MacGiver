@@ -4,8 +4,8 @@
 """Class for MacGyver escape game by JJ"""
 
 import pygame
-import random
-from constant import *
+from random import randint
+import constant as cs
 
 
 class RandomObjects:
@@ -25,14 +25,14 @@ class RandomObjects:
     def showme_item(self, window):
         """Display items in random sprites"""
         while self.check:
-            self.case_x = random.randint(0, SPRITE_LENGTH - 1)
+            self.case_x = randint(0, cs.SPRITE_LENGTH - 1)
             # We randomize the case_x position
-            self.case_y = random.randint(0, SPRITE_LENGTH - 1)
+            self.case_y = randint(0, cs.SPRITE_LENGTH - 1)
             # same for case_y position
             if self.structure[self.case_y][self.case_x] == '0':
                 # if the randomized position is located on a free space
-                self.y = self.case_y * SPRITE_WIDTH + BANNER
+                self.y = self.case_y * cs.SPRITE_WIDTH + cs.BANNER
                 # We define/accept the position for the object
-                self.x = self.case_x * SPRITE_WIDTH
+                self.x = self.case_x * cs.SPRITE_WIDTH
                 self.check = False
                 # Once we have defined a items position, we kill the loop

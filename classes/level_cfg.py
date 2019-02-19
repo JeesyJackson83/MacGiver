@@ -4,7 +4,7 @@
 """Class for MacGyver escape game by JJ"""
 
 import pygame
-from constant import *
+import constant as cs
 
 
 class Level:
@@ -35,13 +35,13 @@ class Level:
     def showme(self, window):
         """Method for show level with created file -> level_file()"""
         # #load picture
-        mur = pygame.image.load(WALL).convert()
-        arrivee = pygame.image.load(IMAGE_ARRIVEE).convert()
+        mur = pygame.image.load(cs.WALL).convert()
+        arrivee = pygame.image.load(cs.IMAGE_ARRIVEE).convert()
 
         for line, col in enumerate(self.structure):
-            y = line * SPRITE_WIDTH + BANNER
+            y = line * cs.SPRITE_WIDTH + cs.BANNER
             for pos, sprite in enumerate(col):
-                x = pos * SPRITE_WIDTH
+                x = pos * cs.SPRITE_WIDTH
                 if sprite == 'm':  # m = mur
                     window.blit(mur, (x, y))
                 elif sprite == 'a':  # a = arrivee

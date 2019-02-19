@@ -6,38 +6,34 @@ MacGyver Game by JJ
 find the exit but catch the items for it before
 
 Python Script
-Files : mcgivgame.py, class.py, constant.py, level.txt + pictures
+Files : main.py, constant.py, level_design.txt
+Directory: images and classes with character.py, level_cfg.py, objects.py
 """
 
 # python libraries
 import os
 import pygame
+from pygame.locals import *
 
 # personal libraries
-from classes.character import *
-from classes.level_cfg import *
-from classes.objects import *
-from constant import *
+import classes.character as chrc
+import classes.level_cfg as lcfg
+import classes.objects as ro
+import classes.game_setting as game
+import constant as cs
 
 
 pygame.init()
 
 # Open Pygame window (width = height)
-window = pygame.display.set_mode((COTE_FENETRE, COTE_FENETRE_H))
-# Icon
-icone = pygame.image.load(IMAGE_ICONE)
-pygame.display.set_icon(icone)
-# Title
-pygame.display.set_caption(WINDOW_TITLE)
-
-# add possibility to keep key down to move
-pygame.key.set_repeat(100, 30)
+window = pygame.display.set_mode((cs.COTE_FENETRE, cs.COTE_FENETRE_H))
+game_set = game.Game.w_game_init()
 
 # Main Loop
 continue_main = 1
 while continue_main:
     # chargement et affichage de l'écran d'accueil
-    accueil = pygame.image.load(START).convert()
+    accueil = pygame.image.load(cs.START).convert()
     window.blit(accueil, (0, 30))
 
     # rafraichissement
@@ -51,7 +47,7 @@ while continue_main:
     while continue_start:
 
         # 30 frames per seconds
-        pygame.time.Clock().tick(30)
+        # pygame.time.Clock().tick(30)
 
         for event in pygame.event.get():
 
@@ -75,25 +71,26 @@ while continue_main:
     # if not we don't load the map
     if begin != 0:
         # load background
-        background = pygame.image.load(BACKGROUND_P).convert()
+        background = pygame.image.load(cs.BACKGROUND_P).convert()
 
         # level creation with level file
-        level = Level(begin)
+        level = lcfg.Level(begin)
         level.level_file()
         level.showme(window)
 
         # Character and objects variables
-        mcgyv = Character(PICGYV_P, level)
-        needle = RandomObjects(NEEDLE_P, level)
+        mcgyv = chrc.Character(cs.PICGYV_P, level)
+        needle = ro.RandomObjects(cs.NEEDLE_P, level)
         needle.showme_item(window)
-        tube = RandomObjects(TUBE_P, level)
+        tube = ro.RandomObjects(cs.TUBE_P, level)
         tube.showme_item(window)
-        ether = RandomObjects(ETHER_P, level)
+        ether = ro.RandomObjects(cs.ETHER_P, level)
         ether.showme_item(window)
         # Load syringe picture
-        syringe = pygame.image.load(SYRINGE_P).convert_alpha()
+        syringe = pygame.image.load(cs.SYRINGE_P).convert_alpha()
 
         # Show inventory status
+        # game.Game.handle_inventory(window)
         font_inventory = pygame.font.Font(None, 30)
         inventory = font_inventory.render("Inventory: ", 1, (255, 255, 255))
         window.blit(inventory, (10, 5))
@@ -115,11 +112,13 @@ while continue_main:
             if event.type == QUIT:
                 continue_game = 0
                 continue_main = 0
+                end_game = 0
 
             elif event.type == KEYDOWN:
                 # if Echap return to lobby
                 if event.key == K_ESCAPE:
                     continue_game = 0
+                    end_game = 0
 
                 # MacGyver move key
                 elif event.key == K_RIGHT:
@@ -141,8 +140,8 @@ while continue_main:
             window.blit(needle.img_items, (needle.x, needle.y))
             if (mcgyv.x, mcgyv.y) == (needle.x, needle.y):
                 # Print text on home screen
-                window.blit(needle.img_items, (120, 0))
                 needle_on = False
+                window.blit(needle.img_items, (120, 0))
 
         # boolean for interaction between Character and objects
         if tube_on:
@@ -167,18 +166,18 @@ while continue_main:
         if level.structure[mcgyv.case_y][mcgyv.case_x] == 'a' and incomplete_stuff is False:
             continue_game = 0
             end_game = 1
-            win_token = 1
+            win_token = True
 
         elif level.structure[mcgyv.case_y][mcgyv.case_x] == 'a':
             continue_game = 0
             end_game = 1
-            win_token = 0
+            win_token = False
 
         pygame.display.flip()
 
     while end_game:
-        # chargement et affichage de l'écran d'accueil
-        end_status = pygame.image.load(BACKGROUND_P).convert()
+        # Show only background
+        end_status = pygame.image.load(cs.BACKGROUND_P).convert()
         window.blit(end_status, (0, 30))
 
         # Show key for Quit
@@ -186,7 +185,7 @@ while continue_main:
         quit_game = font_quit.render("Press Echap to Quit the Game", 1, (255, 255, 255))
         window.blit(quit_game, (80, 250))
 
-        if win_token == 1:
+        if win_token:
             # Show win message
             font_win = pygame.font.Font(None, 30)
             win_game = font_win.render("Well Done ! You're knocked him !", 1, (49, 246, 10))
